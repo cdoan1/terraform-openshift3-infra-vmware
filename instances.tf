@@ -25,6 +25,12 @@ data "template_file" "private_ips" {
   template = "${cidrhost(var.private_staticipblock, 1 + var.private_staticipblock_offset + count.index)}"
 }
 
+data "template_file" "storage_private_ips" {
+  count = "3"
+
+  template = "${cidrhost(var.private_storagestaticipblock, 1 + var.private_storagestaticipblock_offset + count.index)}"
+}
+
 data "template_file" "public_ips" {
   count = "${var.public_network_id != "" ? var.bastion["nodes"] : 0}"
 
@@ -518,12 +524,7 @@ resource "vsphere_virtual_machine" "storage" {
       }
 
       network_interface {
-        ipv4_address  = "${element(data.template_file.private_ips.*.rendered, 
-          var.bastion["nodes"] + 
-          var.master["nodes"] + 
-          var.infra["nodes"] + 
-          var.worker["nodes"] + 
-          count.index)}"
+        ipv4_address  = "${element(data.template_file.storage_private_ips.*.rendered, count.index)}"
         ipv4_netmask  = "${var.private_netmask}"
       }
 

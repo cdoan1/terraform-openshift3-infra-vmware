@@ -72,12 +72,22 @@ variable "private_staticipblock" {
     default     = "0.0.0.0/0"
 }
 
+variable "private_storagestaticipblock" {
+    description = "Specify start unused static ip cidr block to assign IP addresses to the cluster, e.g. 172.16.0.0/16.  Set to 0.0.0.0/0 for DHCP."
+    default     = "0.0.0.0/0"
+}
+
 variable "public_staticipblock_offset" {
     description = "Specify the starting offset of the staticipblock to begin assigning IP addresses from.  e.g. with staticipblock 172.16.0.0/16, offset of 10 will cause IP address assignment to begin at 172.16.0.11."
     default     = 0
 }
 
 variable "private_staticipblock_offset" {
+    description = "Specify the starting offset of the staticipblock to begin assigning IP addresses from.  e.g. with staticipblock 172.16.0.0/16, offset of 10 will cause IP address assignment to begin at 172.16.0.11."
+    default     = 0
+}
+
+variable "private_storagestaticipblock_offset" {
     description = "Specify the starting offset of the staticipblock to begin assigning IP addresses from.  e.g. with staticipblock 172.16.0.0/16, offset of 10 will cause IP address assignment to begin at 172.16.0.11."
     default     = 0
 }
