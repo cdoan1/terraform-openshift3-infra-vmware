@@ -489,7 +489,7 @@ resource "vsphere_virtual_machine" "storage_ds_cluster" {
       }
 
       network_interface {
-        ipv4_address  = "${element(data.template_file.private_ips.*.rendered, 
+        ipv4_address  = "${element(data.template_file.storage_private_ips.*.rendered, 
           var.bastion["nodes"] + 
           var.master["nodes"] + 
           var.infra["nodes"] + 
